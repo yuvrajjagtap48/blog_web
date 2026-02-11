@@ -39,10 +39,18 @@ Blogs
 
 
 profileRouter
-    GET   /profile/view
+    GET   /profile
     PATCH /profile/edit
     PATCH /profile/password //forgot password API
 
-
+- Plan API Design 
+- Create redux store for app
+- set user in store 
+- Create Profile route for user 
+- Create profile edit route for user
+- Create Blog feed that contain all blog 
+- Add Pagination to Blogs feed that only contain 6 blogs at time 
+- Create BlogDetails that contain full info about blogs
+ 
     
     

@@ -4,6 +4,8 @@ import Login from "./components/Login";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Profile from "./components/Profile";
+import BlogDetail from "./components/BlogDetail";
 
 function App() {
   return (
@@ -12,8 +14,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Body />}>
               <Route path="/" element={<Blogs />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="blog/:id" element={<BlogDetail />} />
             </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
     </Provider>
