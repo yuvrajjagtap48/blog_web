@@ -1,4 +1,4 @@
-const Feed = () => {
+const Blogs = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold text-center mt-10">Welcome to the Feed!</h1>
@@ -6,4 +6,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default Blogs;

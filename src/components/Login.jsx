@@ -16,7 +16,7 @@ const Login = () => {
   const handleLogin = () => {
     if (emailId === demoEmail && password === demoPassword) {
       setError("");
-      navigate("/feed");
+      navigate("/");
       return;
     }
 
