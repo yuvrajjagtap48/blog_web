@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../utils/userSlice";
+import UserCard from "./UserCard";
 
 
 const EditProfile = ({ user }) => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
@@ -9,6 +13,18 @@ const EditProfile = ({ user }) => {
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   
+
+  const handleSaveProfile = () => {
+    const updatedUser = {
+      firstName,
+      lastName,
+      photoUrl,
+      age,
+      gender,
+      about,
+    };
+    dispatch(updateUser(updatedUser));
+  };
 
   return (
     <>
@@ -87,7 +103,7 @@ const EditProfile = ({ user }) => {
               </div>
               <p className="text-red-500">  </p>
               <div className="card-actions justify-center m-2">
-                <button className="btn btn-primary" >
+                <button className="btn btn-primary" onClick={handleSaveProfile}>
                   Save Profile
                 </button>
               </div>

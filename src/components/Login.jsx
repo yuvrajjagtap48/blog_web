@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const demoEmail = "demo@gmail.com";
@@ -11,11 +13,19 @@ const Login = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
  
 
   const handleLogin = () => {
     if (emailId === demoEmail && password === demoPassword) {
       setError("");
+      const user = {
+        firstName: "Demo",
+        lastName: "User",
+        emailId: demoEmail,
+        photoUrl: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+      };
+      dispatch(addUser(user));
       navigate("/");
       return;
     }

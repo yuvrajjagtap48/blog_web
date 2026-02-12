@@ -51,6 +51,5 @@ profileRouter
 - Create Blog feed that contain all blog 
 - Add Pagination to Blogs feed that only contain 6 blogs at time 
 - Create BlogDetails that contain full info about blogs
- 
-    
+
     
