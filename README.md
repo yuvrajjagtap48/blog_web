@@ -53,3 +53,15 @@ profileRouter
 - Create BlogDetails that contain full info about blogs
 
     
+# 12-02-2026
+- Resolve error of redux
+- Add BlogSlice for increment of like button
+- Update Blogs components 
+- add Comments feature with author reply on it 
+
+
+# 13-02-2026
+- Create a new Route for Creating NewBlog 
+- Create User can create new blog with value{Title,AuthorName,PhotoUrl,CreatedDate,LastModify,DetailInfo}
+- Add CreatedDate and LastModify date to BlogDetails using system date 
+- ✅ One user can add multiple comments and blogs but only like each blog once- ✅ Fix auto logout on page refresh by implementing localStorage persistence for user authentication

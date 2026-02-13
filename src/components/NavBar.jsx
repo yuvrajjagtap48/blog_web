@@ -52,7 +52,11 @@ const Navbar = () => {
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
-                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/newblog" className="justify-between">
+                    Create New Blog
                   </Link>
                 </li>
                 <li>
