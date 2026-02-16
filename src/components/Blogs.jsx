@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { likeBlog, deleteBlog } from "../utils/blogsSlice";
+import { likeBlog } from "../utils/blogsSlice";
 import { addLikedBlog } from "../utils/userSlice";
 import Pagination from "./Pagination";
 
@@ -12,6 +12,7 @@ export default function Blogs() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // add pagination for 6
+
   // pagination logic
   const totalPages = Math.ceil(blogs.length / itemsPerPage);
   const currentBlogs = blogs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -20,12 +21,6 @@ export default function Blogs() {
     if (user && !user.likedBlogs.includes(blogId)) {
       dispatch(likeBlog({ blogId, userId: user.id }));
       dispatch(addLikedBlog(blogId));
-    }
-  };
-
-  const handleDelete = (blogId) => {
-    if (window.confirm('Are you sure you want to delete this blog?')) {
-      dispatch(deleteBlog({ blogId }));
     }
   };
 
@@ -86,15 +81,6 @@ export default function Blogs() {
               </div>
 
               <div className="flex gap-2">
-                {user && blog.userId === user.id && (
-                  <button
-                    onClick={() => handleDelete(blog.id)}
-                    className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-xs"
-                    title="Delete Blog"
-                  >
-                    🗑️ Delete
-                  </button>
-                )}
                 <button
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                   onClick={() => navigate(`/blog/${blog.id}`)}

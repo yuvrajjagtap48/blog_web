@@ -5,11 +5,7 @@ import Footer from './Footer';
 import NewBlog from './NewBlog';
 import ProfileModal from './Profile';
 import FloatingBackButton from './FloatingBackButton';
-import {
-  openNewBlogModal,
-  openProfileModal,
-  closeAllModals
-} from '../utils/modalSlice';
+import { openNewBlogModal, openProfileModal, closeAllModals } from '../utils/modalSlice';
 
 const Body = () => {
   const dispatch = useDispatch();

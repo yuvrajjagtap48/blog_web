@@ -80,9 +80,16 @@ profileRouter
 
 
 # 16-02-2026
+- Add Deboucing logic to search
+- Make search logic work
+- add photo upload instead of PhotoUrl
+- Add delete blog button for blog authors only on blog detail pages
+
+
+
 # Debouncing in search
 - if difference between 2 key strockes is <200ms => DECLINE API call =>   >200ms make API call
--  
+- 
  useEffect(() => {
     // make an API call after every key press
     // but if the difference between 2 API calls is <200ms
