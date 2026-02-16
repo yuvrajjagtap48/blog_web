@@ -5,8 +5,8 @@ const newBlogFormSlice = createSlice({
   initialState: {
     title: '',
     author: '',
-    photoUrl: '',
     detailInfo: '',
+    photo: '',
   },
   reducers: {
     updateField: (state, action) => {
@@ -16,8 +16,8 @@ const newBlogFormSlice = createSlice({
     resetForm: (state) => {
       state.title = '';
       state.author = '';
-      state.photoUrl = '';
       state.detailInfo = '';
+      state.photo = '';
     },
   },
 });

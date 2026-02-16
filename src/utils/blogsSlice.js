@@ -127,9 +127,17 @@ const blogsSlice = createSlice({
         saveBlogsToStorage(state);
       }
     },
+    deleteBlog: (state, action) => {
+      const { blogId } = action.payload;
+      const index = state.findIndex((blog) => blog.id === blogId);
+      if (index !== -1) {
+        state.splice(index, 1);
+        saveBlogsToStorage(state);
+      }
+    },
   },
 });
 
-export const { addBlog, likeBlog, updateCommentCount } = blogsSlice.actions;
+export const { addBlog, likeBlog, updateCommentCount, deleteBlog } = blogsSlice.actions;
 
 export default blogsSlice.reducer;

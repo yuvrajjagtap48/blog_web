@@ -29,7 +29,11 @@ const userSlice = createSlice({
   initialState: loadUserFromStorage(),
   reducers: {
     addUser: (state, action) => {
-      const userData = { ...action.payload, likedBlogs: [] };
+      const userData = { 
+        id: Date.now(), // Generate unique ID
+        ...action.payload, 
+        likedBlogs: [] 
+      };
       saveUserToStorage(userData);
       return userData;
     },

@@ -11,14 +11,12 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
  
 
   const handleLogin = () => {
     if (emailId === demoEmail && password === demoPassword) {
-      setError("");
       const user = {
         firstName: "Demo",
         lastName: "User",
@@ -27,14 +25,17 @@ const Login = () => {
       };
       dispatch(addUser(user));
       navigate("/");
-      return;
     }
-
-    setError("Invalid email or password");
   };
 
   const handleSignUp = () => {
-    setError("");
+    // For demo purposes, just show success message
+    alert("Sign up successful! Please use demo@gmail.com / demo@123 to login.");
+    setIsLoginForm(true);
+    setFirstName("");
+    setLastName("");
+    setEmailId(demoEmail);
+    setPassword(demoPassword);
   };
 
   return (
@@ -94,7 +95,6 @@ const Login = () => {
               />
             </label>
           </div>
-          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center m-2">
             <button
               className="btn btn-primary"

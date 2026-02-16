@@ -64,4 +64,64 @@ profileRouter
 - Create a new Route for Creating NewBlog 
 - Create User can create new blog with value{Title,AuthorName,PhotoUrl,CreatedDate,LastModify,DetailInfo}
 - Add CreatedDate and LastModify date to BlogDetails using system date 
-- ✅ One user can add multiple comments and blogs but only like each blog once- ✅ Fix auto logout on page refresh by implementing localStorage persistence for user authentication
+- One user can add multiple comments and blogs but only like each blog once
+- Fix auto logout on page refresh by implementing localStorage persistence for user authentication
+- Remove CreateNewBlog route and add it inside feed page 
+- Add flotting back button to website
+- remove some routes
+- show Profile and newBlog at same route
+- update navbar
+- add {home about contact} route 
+- add logout option icon with logout functionlity
+- add create new blog option on navbar so user can see it 
+- Add blur effect to popup of profile and create new blog
+- Add info into footer and place it after blog feed
+- clean some of code 
+
+
+# 16-02-2026
+# Debouncing in search
+- if difference between 2 key strockes is <200ms => DECLINE API call =>   >200ms make API call
+-  
+ useEffect(() => {
+    // make an API call after every key press
+    // but if the difference between 2 API calls is <200ms
+    // decline the API call
+
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        getSearchResults();
+      }
+    }, 200);
+
+
+    /**
+     * press key - i
+     *  - render the component with searchQuery = "i"
+     *  - useEffect();
+     *  - start timer => make api call after 200ms
+     * 
+     * key - ip 
+     *  - destroy the component(useEffect return method)
+     *  - re-render the component
+     *  - useEffect()
+     *  - clear the previous timer (for "i") => no API call for "i"
+     *  - start new timer for "ip"
+     * 
+     * 
+     * - new timer starts for "ip"
+     * setTimeout(200) - make an API call for "ip"
+     * 
+     * 
+     */
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchResults = async () => {
+    const data = await fetch(`http://localhost:3000/blogs?q=${searchQuery}`);
+    const json = await data.json();
+    console.log(json);
+    
+  }
