@@ -4,6 +4,7 @@ import blogsReducer from "./blogsSlice";
 import commentsReducer from "./commentsSlice";
 import newBlogFormReducer from "./newBlogFormSlice";
 import modalReducer from "./modalSlice";
+import searchReducer from "./searchSlice";
 
 const appStore = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const appStore = configureStore({
         comments: commentsReducer,
         newBlogForm: newBlogFormReducer,
         modal: modalReducer,
+        search: searchReducer,
     },
 })
 

@@ -10,14 +10,19 @@ const NewBlog = ({ isOpen, onClose }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updateField({ field: name, value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const currentDate = formatDate(new Date());
     const newBlog = {
@@ -34,6 +39,7 @@ const NewBlog = ({ isOpen, onClose }) => {
     dispatch(addBlog(newBlog));
     dispatch(resetForm());
     setShowToast(true);
+    setIsSubmitting(false);
     setTimeout(() => {
       setShowToast(false);
       onClose();
@@ -52,10 +58,10 @@ const NewBlog = ({ isOpen, onClose }) => {
     <>
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed top-4 right-4 z-60">
-          <div className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        <div className="fixed top-4 right-4 z-60 animate-bounce">
+          <div className="alert alert-success shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 000 16zm0-6v6m0 0v6m0-6h6m-6 0H9" />
             </svg>
             <span>Blog created successfully!</span>
           </div>
@@ -64,84 +70,104 @@ const NewBlog = ({ isOpen, onClose }) => {
 
       {/* Backdrop with blur */}
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={handleBackdropClick} />
-      <div className="fixed inset-0 flex items-center justify-center z-50" onClick={handleBackdropClick}>
-        <div className="bg-white/95 backdrop-blur-xl rounded-lg shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto border border-white/20" onClick={(e) => e.stopPropagation()}>
-        <div className="p-6">
-          <div className="flex justify-end items-center mb-6">
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl leading-none"
-            >
-              ×
-            </button>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-600"
-              />
-            </div>
-            <div>
-              <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author Name</label>
-              <input
-                type="text"
-                id="author"
-                name="author"
-                value={formData.author}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-600"
-              />
-            </div>
-            <div>
-              <label htmlFor="detailInfo" className="block text-sm font-medium text-gray-700">Detail Info</label>
-              <textarea
-                id="detailInfo"
-                name="detailInfo"
-                value={formData.detailInfo}
-                onChange={handleChange}
-                required
-                rows="6"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-600"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Blog Photo</label>
-              <PhotoUploadInput 
-                onPhotoChange={(photo) => dispatch(updateField({ field: 'photo', value: photo }))} 
-                currentPhoto={formData.photo}
-              />
-            </div>
-            <div className="text-sm text-gray-600">
-              <p>Created Date: {formatDate(new Date())}</p>
-            </div>
-            <div className="flex gap-3 pt-4">
+      <div className="fixed inset-0 flex items-center justify-center z-50 p-4" onClick={handleBackdropClick}>
+        <div className="bg-base-100 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-base-300" onClick={(e) => e.stopPropagation()}>
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-base-content">Create New Blog</h2>
               <button
-                type="button"
                 onClick={onClose}
-                className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="btn btn-ghost btn-circle"
               >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Create Blog
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
-          </form>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Blog Title</span>
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                  placeholder="Enter an engaging title"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Author Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="author"
+                  value={formData.author}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                  placeholder="Your name or pen name"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Blog Content</span>
+                </label>
+                <textarea
+                  name="detailInfo"
+                  value={formData.detailInfo}
+                  onChange={handleChange}
+                  required
+                  rows="8"
+                  className="textarea textarea-bordered focus:textarea-primary transition-all duration-300 resize-none p-4"
+                  placeholder="Share your thoughts, stories, and insights..."
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Blog Image (Optional)</span>
+                </label>
+                <PhotoUploadInput
+                  onPhotoChange={(photo) => dispatch(updateField({ field: 'photo', value: photo }))}
+                  currentPhoto={formData.photo}
+                />
+              </div>
+
+              <div className="bg-base-200 rounded-lg p-4">
+                <p className="text-sm text-base-content/70">
+                  <span className="font-medium">Created Date:</span> {formatDate(new Date())}
+                </p>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex-1 btn btn-outline"
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className={`flex-1 btn btn-primary ${isSubmitting ? 'loading' : ''}`}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Creating...' : 'Create Blog'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

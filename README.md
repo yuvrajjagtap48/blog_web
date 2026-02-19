@@ -84,6 +84,9 @@ profileRouter
 - Make search logic work
 - add photo upload instead of PhotoUrl
 - Add delete blog button for blog authors only on blog detail pages
+- Display blog images on blog detail pages
+- 
+
 
 
 
@@ -100,8 +103,6 @@ profileRouter
         getSearchResults();
       }
     }, 200);
-
-
     /**
      * press key - i
      *  - render the component with searchQuery = "i"
@@ -115,10 +116,8 @@ profileRouter
      *  - clear the previous timer (for "i") => no API call for "i"
      *  - start new timer for "ip"
      * 
-     * 
      * - new timer starts for "ip"
      * setTimeout(200) - make an API call for "ip"
-     * 
      * 
      */
     return () => {
@@ -126,9 +125,6 @@ profileRouter
     };
   }, [searchQuery]);
 
-  const getSearchResults = async () => {
-    const data = await fetch(`http://localhost:3000/blogs?q=${searchQuery}`);
-    const json = await data.json();
-    console.log(json);
-    
-  }
+ 
+
+ 

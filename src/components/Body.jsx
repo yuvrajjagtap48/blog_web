@@ -5,12 +5,14 @@ import Footer from './Footer';
 import NewBlog from './NewBlog';
 import ProfileModal from './Profile';
 import FloatingBackButton from './FloatingBackButton';
+import SearchResults from './SearchResults';
 import { openNewBlogModal, openProfileModal, closeAllModals } from '../utils/modalSlice';
 
 const Body = () => {
   const dispatch = useDispatch();
   const { isNewBlogModalOpen, isProfileModalOpen } = useSelector((state) => state.modal);
   const user = useSelector((store) => store.user);
+  const searchQuery = useSelector((store) => store.search.query);
 
   const handleCloseModals = () => dispatch(closeAllModals());
 
@@ -21,7 +23,7 @@ const Body = () => {
         onProfileClick={() => dispatch(openProfileModal())}
       />
 
-      <Outlet />
+      {searchQuery.trim() ? <SearchResults /> : <Outlet />}
 
       <Footer />
 

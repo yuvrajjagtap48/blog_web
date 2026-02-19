@@ -11,11 +11,15 @@ const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     if (emailId === demoEmail && password === demoPassword) {
       const user = {
         firstName: "Demo",
@@ -25,7 +29,10 @@ const Login = () => {
       };
       dispatch(addUser(user));
       navigate("/");
+    } else {
+      alert("Invalid credentials. Use demo@gmail.com / demo@123");
     }
+    setIsLoading(false);
   };
 
   const handleSignUp = () => {
@@ -39,82 +46,99 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
-      <div className="card bg-base-300 w-96 shadow-xl">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 flex items-center justify-center p-4">
+      <div className="card bg-base-100 w-full max-w-md shadow-2xl border border-base-300">
         <div className="card-body">
-          <h2 className="card-title justify-center">
-            {isLoginForm ? "Login" : "Sign Up"}
-          </h2>
-          <div>
+          <div className="text-center mb-8">
+            <h2 className="card-title justify-center text-2xl font-bold">
+              {isLoginForm ? "Welcome Back" : "Create Account"}
+            </h2>
+            <p className="text-base-content/70">
+              {isLoginForm ? "Sign in to your account" : "Join our community"}
+            </p>
+          </div>
+
+          <div className="space-y-4">
             {!isLoginForm && (
               <>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">First Name</span>
-                  </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-medium">First Name</span>
+                  </label>
                   <input
                     type="text"
                     value={firstName}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:input-primary transition-all duration-300 p-4 w-full"
                     onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Enter your first name"
                   />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">Last Name</span>
-                  </div>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-medium">Last Name</span>
+                  </label>
                   <input
                     type="text"
                     value={lastName}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-bordered focus:input-primary transition-all duration-300 p-4 w-full"
                     onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Enter your last name"
                   />
-                </label>
+                </div>
               </>
             )}
-            <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Email ID:</span>
-              </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Email Address</span>
+              </label>
               <input
-                type="text"
+                type="email"
                 value={emailId}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered focus:input-primary transition-all duration-300 p-4 w-full"
                 onChange={(e) => setEmailId(e.target.value)}
+                placeholder="Enter your email"
               />
-            </label>
-            <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Password</span>
-              </div>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium">Password</span>
+              </label>
               <input
                 type="password"
                 value={password}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered focus:input-primary transition-all duration-300 p-4 w-full"
                 onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
               />
-            </label>
+            </div>
           </div>
-          <div className="card-actions justify-center m-2">
+
+          <div className="card-actions justify-center mt-6">
             <button
-              className="btn btn-primary"
+              className={`btn btn-primary w-full ${isLoading ? 'loading' : ''}`}
               onClick={isLoginForm ? handleLogin : handleSignUp}
+              disabled={isLoading}
             >
-              {isLoginForm ? "Login" : "Sign Up"}
+              {isLoading ? 'Please wait...' : (isLoginForm ? "Sign In" : "Create Account")}
             </button>
           </div>
 
-          <p
-            className="m-auto cursor-pointer py-2"
-            onClick={() => setIsLoginForm((value) => !value)}
-          >
-            {isLoginForm
-              ? "New User? Signup Here"
-              : "Existing User? Login Here"}
-          </p>
+          <div className="text-center mt-4">
+            <button
+              className="link link-primary"
+              onClick={() => setIsLoginForm((value) => !value)}
+            >
+              {isLoginForm
+                ? "Don't have an account? Sign up"
+                : "Already have an account? Sign in"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default Login;
