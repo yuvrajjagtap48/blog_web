@@ -79,84 +79,86 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Edit Form */}
               <div className="space-y-4">
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-center gap-4">
+                  <label className="label w-32 flex-shrink-0">
                     <span className="label-text font-medium">First Name</span>
                   </label>
                   <input
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                    className="input input-bordered focus:input-primary transition-all duration-300 p-4 flex-1"
                     placeholder="Enter your first name"
                   />
                 </div>
 
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-center gap-4">
+                  <label className="label w-32 flex-shrink-0">
                     <span className="label-text font-medium">Last Name</span>
                   </label>
                   <input
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                    className="input input-bordered focus:input-primary transition-all duration-300 p-4 flex-1"
                     placeholder="Enter your last name"
                   />
                 </div>
 
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-center gap-4">
+                  <label className="label w-32 flex-shrink-0">
                     <span className="label-text font-medium">Age</span>
                   </label>
                   <input
                     type="number"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                    className="input input-bordered focus:input-primary transition-all duration-300 p-4 flex-1"
                     placeholder="Enter your age"
                   />
                 </div>
 
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-center gap-4">
+                  <label className="label w-32 flex-shrink-0">
                     <span className="label-text font-medium">Gender</span>
                   </label>
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="select select-bordered focus:select-primary transition-all duration-300 p-4"
+                    className="select select-bordered focus:select-primary transition-all duration-300 p-4 flex-1"
                   >
                     <option value="">Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
                   </select>
                 </div>
 
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-start gap-4">
+                  <label className="label w-32 flex-shrink-0 pt-2">
                     <span className="label-text font-medium">About</span>
                   </label>
                   <textarea
                     value={about}
                     onChange={(e) => setAbout(e.target.value)}
                     rows={4}
-                    className="textarea textarea-bordered focus:textarea-primary transition-all duration-300 resize-none p-4"
+                    className="textarea textarea-bordered focus:textarea-primary transition-all duration-300 resize-none p-4 flex-1"
                     placeholder="Tell us about yourself..."
                   />
                 </div>
 
-                <div className="form-control">
-                  <label className="label">
+                <div className="flex items-center gap-4">
+                  <label className="label w-32 flex-shrink-0">
                     <span className="label-text font-medium">Profile Photo</span>
                   </label>
-                  <PhotoUploadInput onPhotoChange={setPhotoUrl} currentPhoto={photoUrl} />
+                  <div className="flex-1">
+                    <PhotoUploadInput onPhotoChange={setPhotoUrl}  />
+                  </div>
                 </div>
-              </div>
 
-              {/* User Card Preview */}
+                </div>
+
+                {/* User Card Preview */}
               <div className="flex justify-center lg:justify-start">
                 <div className="sticky top-4">
                   <h3 className="text-lg font-semibold mb-4 text-base-content">Preview</h3>

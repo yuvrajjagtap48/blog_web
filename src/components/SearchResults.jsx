@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setQuery } from "../utils/searchSlice";
 import Pagination from "./Pagination";
 
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs);
   const reduxQuery = useSelector((state) => state.search.query);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,8 +24,9 @@ export default function SearchResults() {
   // Reset to page 1 when search query changes
   useEffect(() => {
     if (prevSearchQueryRef.current !== searchQuery) {
-      setCurrentPage(1); // eslint-disable-line react-hooks/set-state-in-effect
       prevSearchQueryRef.current = searchQuery;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCurrentPage(1);
     }
   }, [searchQuery]);
   const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
@@ -86,17 +89,17 @@ export default function SearchResults() {
           <h1 className="text-4xl font-bold text-base-content mb-2">
             Search Results
           </h1>
-          <p className="text-lg text-base-content/70 mb-4">
-            Found <span className="font-semibold text-primary">{filteredBlogs.length}</span> result{filteredBlogs.length !== 1 ? 's' : ''} for "{searchQuery}"
-          </p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => {
+              dispatch(setQuery(''));
+              navigate('/');
+            }}
             className="btn btn-outline btn-primary"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to All Blogs
+            Browse All Blogs
           </button>
         </div>
 
@@ -113,7 +116,10 @@ export default function SearchResults() {
                     Try adjusting your search terms or browse all blogs.
                   </p>
                   <button
-                    onClick={() => navigate('/')}
+                    onClick={() => {
+                      dispatch(setQuery(''));
+                      navigate('/');
+                    }}
                     className="btn btn-primary"
                   >
                     Browse All Blogs

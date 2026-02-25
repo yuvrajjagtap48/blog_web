@@ -85,9 +85,30 @@ profileRouter
 - add photo upload instead of PhotoUrl
 - Add delete blog button for blog authors only on blog detail pages
 - Display blog images on blog detail pages
+
+# 17-02-2026
+- Insearch functionality it automatically highlight search result into blog feed 
+- Add new search file SearchResult for better result 
+
+# 18-02-2026
+- Handle responevienss of website 
+- Make minor changes in button and color of button for comments, like, reply 
+
+
+# 19-02-2026
+- Add more UI/UX designing for better user exprience 
+- Adjust button and position of button
+- update NavBar with newBLog show and logout and profile inside profile icon
+
+
+# 23-02-2026
+- Update Footer 
+- Update Login and signup page 
+- Add effects in login
+
+- Align User Profile and Create new Blog inputs
+- fixed search result 
 - 
-
-
 
 
 # Debouncing in search
@@ -126,5 +147,7 @@ profileRouter
   }, [searchQuery]);
 
  
+
+ # 
 
  

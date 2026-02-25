@@ -93,7 +93,7 @@ const Navbar = ({ onNewBlogClick, onProfileClick }) => {
               </ul>
             )}
           </div>
-          <Link to="/" className="btn btn-ghost text-xl font-bold text-primary">
+          <button onClick={() => { dispatch(setQuery('')); navigate('/'); }} className="btn btn-ghost text-xl font-bold text-primary">
             <svg
               className="w-6 h-6 mr-2"
               fill="currentColor"
@@ -102,7 +102,7 @@ const Navbar = ({ onNewBlogClick, onProfileClick }) => {
               <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             BlogHub
-          </Link>
+          </button>
         </div>
 
         <div className="navbar-center hidden lg:flex">

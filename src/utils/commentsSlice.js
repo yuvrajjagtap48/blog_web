@@ -33,7 +33,6 @@ const loadCommentsFromStorage = () => {
       ],
     };
   } catch (error) {
-    console.error('Error loading comments from localStorage:', error);
     return {};
   }
 };
@@ -43,7 +42,7 @@ const saveCommentsToStorage = (comments) => {
   try {
     localStorage.setItem('blogComments', JSON.stringify(comments));
   } catch (error) {
-    console.error('Error saving comments to localStorage:', error);
+    // Ignore errors
   }
 };
 

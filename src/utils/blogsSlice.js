@@ -85,7 +85,6 @@ const loadBlogsFromStorage = () => {
       },
     ];
   } catch (error) {
-    console.error('Error loading blogs from localStorage:', error);
     return [];
   }
 };
@@ -95,7 +94,7 @@ const saveBlogsToStorage = (blogs) => {
   try {
     localStorage.setItem('blogBlogs', JSON.stringify(blogs));
   } catch (error) {
-    console.error('Error saving blogs to localStorage:', error);
+    // Ignore errors
   }
 };
 

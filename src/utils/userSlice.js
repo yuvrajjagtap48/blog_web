@@ -6,7 +6,6 @@ const loadUserFromStorage = () => {
     const userData = localStorage.getItem('blogUser');
     return userData ? JSON.parse(userData) : null;
   } catch (error) {
-    console.error('Error loading user from localStorage:', error);
     return null;
   }
 };
@@ -20,7 +19,7 @@ const saveUserToStorage = (user) => {
       localStorage.removeItem('blogUser');
     }
   } catch (error) {
-    console.error('Error saving user to localStorage:', error);
+    // Ignore errors
   }
 };
 

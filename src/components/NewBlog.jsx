@@ -85,9 +85,9 @@ const NewBlog = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="form-control">
-                <label className="label">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex items-center gap-4">
+                <label className="label w-32 flex-shrink-0">
                   <span className="label-text font-medium">Blog Title</span>
                 </label>
                 <input
@@ -96,13 +96,13 @@ const NewBlog = ({ isOpen, onClose }) => {
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  className="input input-bordered focus:input-primary transition-all duration-300 p-4"
+                  className="input input-bordered focus:input-primary transition-all duration-300 p-4 flex-1"
                   placeholder="Enter an engaging title"
                 />
               </div>
 
-              <div className="form-control">
-                <label className="label">
+              <div className="flex items-center gap-4">
+                <label className="label w-32 flex-shrink-0">
                   <span className="label-text font-medium">Author Name</span>
                 </label>
                 <input
@@ -116,8 +116,8 @@ const NewBlog = ({ isOpen, onClose }) => {
                 />
               </div>
 
-              <div className="form-control">
-                <label className="label">
+              <div className="flex items-start gap-4">
+                <label className="label w-32 flex-shrink-0 pt-2">
                   <span className="label-text font-medium">Blog Content</span>
                 </label>
                 <textarea
@@ -126,25 +126,21 @@ const NewBlog = ({ isOpen, onClose }) => {
                   onChange={handleChange}
                   required
                   rows="8"
-                  className="textarea textarea-bordered focus:textarea-primary transition-all duration-300 resize-none p-4"
+                  className="textarea textarea-bordered focus:textarea-primary transition-all duration-300 resize-none p-4 flex-1"
                   placeholder="Share your thoughts, stories, and insights..."
                 />
               </div>
 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">Blog Image (Optional)</span>
+              <div className="flex items-center gap-4">
+                <label className="label w-32 flex-shrink-0">
+                  <span className="label-text font-medium">Blog Image</span>
                 </label>
-                <PhotoUploadInput
-                  onPhotoChange={(photo) => dispatch(updateField({ field: 'photo', value: photo }))}
-                  currentPhoto={formData.photo}
-                />
-              </div>
-
-              <div className="bg-base-200 rounded-lg p-4">
-                <p className="text-sm text-base-content/70">
-                  <span className="font-medium">Created Date:</span> {formatDate(new Date())}
-                </p>
+                <div className="flex-1">
+                  <PhotoUploadInput
+                    onPhotoChange={(photo) => dispatch(updateField({ field: 'photo', value: photo }))}
+                    currentPhoto={formData.photo}
+                  />
+                </div>
               </div>
 
               <div className="flex gap-3 pt-4">
