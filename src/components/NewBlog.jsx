@@ -168,4 +168,4 @@ const NewBlog = ({ isOpen, onClose }) => {
   );
 };
 
-export default NewBlog;
+export default NewBlog;  

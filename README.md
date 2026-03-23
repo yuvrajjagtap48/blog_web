@@ -148,6 +148,19 @@ profileRouter
 
  
 
- # 
+
+# Deployment 
+ 
+ - AWS 
+  - EC2
+  - Add instance 
+    - Add Name
+    - Select Ubuntu
+    - Select Instance Type
+    - Create new key pair(download)
+    - Network setting (very IMP in Delopyment)
+      - Create security group
+      - Edit 
+
 
  
